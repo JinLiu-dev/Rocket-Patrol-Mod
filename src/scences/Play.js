@@ -10,10 +10,14 @@ class Play extends Phaser.Scene{
         this.load.audio('sfx_select', './assets/blip_select12.wav');
         this.load.audio('sfx_explosion', './assets/explosion38.wav');
         this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
+        this.load.audio('bgm', './assets/bgm.wav');
 
     }
     create(){
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
+        this.music = this.sound.add('bgm');
+        this.music.loop = true;
+        this.music.play();
         // add rocket (p1)
         this.p1Rocket = new Rocket(this, game.config.width/2, 431, 'rocket').setOrigin(0.5, 0);
         this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4, 'spaceship', 0, 30).setOrigin(0, 0);
@@ -71,9 +75,11 @@ class Play extends Phaser.Scene{
             this.fire.alpha = 0;
         }
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
+            this.music.stop();
             this.scene.restart();
         }
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+            this.music.stop();
             if(game.settings.is_novice){
                 novice_hightscore = game.settings.hightscore;
             }else{
