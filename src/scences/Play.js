@@ -67,9 +67,9 @@ class Play extends Phaser.Scene{
               this.gameOver = true;
             }, null, this);
             this.speedup = this.time.delayedCall(30000, () => {
-                this.ship01.moveSpeed += 2;
-                this.ship02.moveSpeed += 2;
-                this.ship03.moveSpeed += 2;
+                this.ship01.moveSpeed += (this.ship01.moveSpeed > 0? 2 : -2);
+                this.ship02.moveSpeed += (this.ship02.moveSpeed > 0? 2 : -2);
+                this.ship03.moveSpeed += (this.ship03.moveSpeed > 0? 2 : -2);
               }, null, this);
       
     }
