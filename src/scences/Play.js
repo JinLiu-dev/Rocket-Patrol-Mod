@@ -47,11 +47,16 @@ class Play extends Phaser.Scene{
             fixedWidth: 100
           }
           this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
+          this.scoreright = this.add.text(game.config.width - 10 * borderPadding - borderUISize, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
+          this.scoreright.text = game.settings.hightscore;
           this.gameOver = false;
           scoreConfig.fixedWidth = 0;
           this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
               this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
               this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← to Menu', scoreConfig).setOrigin(0.5);
+              if(this.p1Score > game.settings.hightscore){
+                game.settings.hightscore = this.p1Score;
+              }
               this.gameOver = true;
             }, null, this);
       
@@ -61,6 +66,11 @@ class Play extends Phaser.Scene{
             this.scene.restart();
         }
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+            if(game.settings.is_novice){
+                novice_hightscore = game.settings.hightscore;
+            }else{
+                expert_hightscore = game.settings.hightscore;
+            }
             this.scene.start("menuScene");
         }
         this.starfield.tilePositionX -= 4;

@@ -31,16 +31,20 @@ class Menu extends Phaser.Scene{
     update() {
         if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
           game.settings = {
+            is_novice: true,
             spaceshipSpeed: 3,
-            gameTimer: 60000    
+            gameTimer: 60000,
+            hightscore: novice_hightscore
           }
           this.sound.play('sfx_select');
           this.scene.start('playScene');    
         }
         if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
           game.settings = {
+            is_novice: false,
             spaceshipSpeed: 4,
-            gameTimer: 45000    
+            gameTimer: 45000,
+            hightscore: expert_hightscore
           }
           this.sound.play('sfx_select');
           this.scene.start('playScene');    
