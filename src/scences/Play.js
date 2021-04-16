@@ -48,6 +48,9 @@ class Play extends Phaser.Scene{
           }
           this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
           this.scoreright = this.add.text(game.config.width - 10 * borderPadding - borderUISize, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
+          this.fire = this.add.text(borderUISize + 12 * borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
+          this.fire.alpha = 0;
+          this.fire.text = 'FIRE'
           this.scoreright.text = game.settings.hightscore;
           this.gameOver = false;
           scoreConfig.fixedWidth = 0;
@@ -62,6 +65,11 @@ class Play extends Phaser.Scene{
       
     }
     update(){
+        if(this.p1Rocket.isFiring){
+            this.fire.alpha = 1;
+        }else{
+            this.fire.alpha = 0;
+        }
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.scene.restart();
         }
