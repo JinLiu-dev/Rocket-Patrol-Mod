@@ -6,6 +6,7 @@ class Play extends Phaser.Scene{
         this.load.image('rocket', './assets/rocket.png');
         this.load.image('spaceship', './assets/spaceship.png');
         this.load.image('starfield', './assets/starfield.png');
+        this.load.image('bluesky', './assets/bluesky.png');
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
         this.load.audio('sfx_select', './assets/blip_select12.wav');
         this.load.audio('sfx_explosion', './assets/explosion38.wav');
@@ -15,6 +16,7 @@ class Play extends Phaser.Scene{
     }
     create(){
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
+        this.starfield2 = this.add.tileSprite(0, 0, 640, 480, 'bluesky').setOrigin(0, 0);
         this.music = this.sound.add('bgm');
         this.music.loop = true;
         this.music.play();
@@ -93,6 +95,7 @@ class Play extends Phaser.Scene{
             this.scene.start("menuScene");
         }
         this.starfield.tilePositionX -= 4;
+        this.starfield2.tilePositionX -= 2;
         if (!this.gameOver) {               
             this.p1Rocket.update();
             this.ship01.update();
