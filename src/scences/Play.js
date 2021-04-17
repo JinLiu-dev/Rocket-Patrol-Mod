@@ -5,6 +5,7 @@ class Play extends Phaser.Scene{
     preload(){
         this.load.image('rocket', './assets/rocket.png');
         this.load.image('spaceship', './assets/spaceship.png');
+        this.load.image('newship', './assets/newship.png');
         this.load.image('starfield', './assets/starfield.png');
         this.load.image('bluesky', './assets/bluesky.png');
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
@@ -25,6 +26,8 @@ class Play extends Phaser.Scene{
         this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4, 'spaceship', 0, 30).setOrigin(0, 0);
         this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'spaceship', 0, 20).setOrigin(0,0);
         this.ship03 = new Spaceship(this, game.config.width, borderUISize*6 + borderPadding*4, 'spaceship', 0, 10).setOrigin(0,0);
+        this.supership = new Spaceship(this, game.config.width, borderUISize*8 + borderPadding*10, 'newship', 0, 50).setOrigin(0,0);
+        this.supership.moveSpeed *= 2;
         this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
         this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
         this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
@@ -73,6 +76,7 @@ class Play extends Phaser.Scene{
                 this.ship01.moveSpeed += (this.ship01.moveSpeed > 0? 2 : -2);
                 this.ship02.moveSpeed += (this.ship02.moveSpeed > 0? 2 : -2);
                 this.ship03.moveSpeed += (this.ship03.moveSpeed > 0? 2 : -2);
+                this.supership.moveSpeed += (this.supership.moveSpeed > 0? 2 : -2);
               }, null, this);
     }
     update(){
@@ -102,6 +106,7 @@ class Play extends Phaser.Scene{
             this.ship01.update();
             this.ship02.update();
             this.ship03.update();
+            this.supership.update();
         } 
         if(this.checkCollision(this.p1Rocket, this.ship03)) {
             this.p1Rocket.reset();
@@ -114,6 +119,10 @@ class Play extends Phaser.Scene{
           if (this.checkCollision(this.p1Rocket, this.ship01)) {
             this.p1Rocket.reset();
             this.shipExplode(this.ship01);
+          }
+          if(this.checkCollision(this.p1Rocket, this.supership)) {
+            this.p1Rocket.reset();
+            this.shipExplode(this.supership);
           }
 
     }
