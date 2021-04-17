@@ -53,6 +53,7 @@ class Play extends Phaser.Scene{
             fixedWidth: 100
           }
           this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
+          this.timeleft = this.add.text(game.config.width - 20 * borderPadding - borderUISize, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
           this.scoreright = this.add.text(game.config.width - 10 * borderPadding - borderUISize, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
           this.fire = this.add.text(borderUISize + 12 * borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
           this.fire.alpha = 0;
@@ -73,7 +74,6 @@ class Play extends Phaser.Scene{
                 this.ship02.moveSpeed += (this.ship02.moveSpeed > 0? 2 : -2);
                 this.ship03.moveSpeed += (this.ship03.moveSpeed > 0? 2 : -2);
               }, null, this);
-      
     }
     update(){
         if(this.p1Rocket.isFiring){
@@ -96,6 +96,7 @@ class Play extends Phaser.Scene{
         }
         this.starfield.tilePositionX -= 4;
         this.starfield2.tilePositionX -= 2;
+        this.timeleft.text = Math.ceil(this.clock.getRemainingSeconds());
         if (!this.gameOver) {               
             this.p1Rocket.update();
             this.ship01.update();
