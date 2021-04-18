@@ -8,6 +8,10 @@ class Play extends Phaser.Scene{
         this.load.image('newship', './assets/newship.png');
         this.load.image('starfield', './assets/starfield.png');
         this.load.image('bluesky', './assets/bluesky.png');
+        this.load.image('top', './assets/top.png');
+        this.load.image('down', './assets/down.png');
+        this.load.image('left', './assets/left.png');
+        this.load.image('right', './assets/right.png');
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 32, frameHeight: 32, startFrame: 0, endFrame: 5});
         this.load.audio('sfx_select', './assets/blip_select12.wav');
         this.load.audio('sfx_explosion', './assets/explosion38.wav');
@@ -28,11 +32,16 @@ class Play extends Phaser.Scene{
         this.ship03 = new Spaceship(this, game.config.width, borderUISize*6 + borderPadding*4, 'spaceship', 0, 10).setOrigin(0,0);
         this.supership = new Spaceship(this, game.config.width, borderUISize*8 + borderPadding*10, 'newship', 0, 20).setOrigin(0,0);
         this.supership.moveSpeed *= 2;
-        this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
-        this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
+        this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x666666).setOrigin(0, 0);
+        
+        //this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
+        this.add.image(0, 0, 'top').setOrigin(0, 0);
+        this.add.image(0, borderUISize, 'left').setOrigin(0, 0);
+        this.add.image(game.config.width - borderUISize, borderUISize, 'right').setOrigin(0, 0);
+        this.add.image(0, game.config.height - borderUISize, 'down').setOrigin(0, 0);
+        //this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
+        //this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
+        //this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
