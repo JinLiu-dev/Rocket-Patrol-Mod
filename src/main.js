@@ -8,6 +8,7 @@
 //   -The bgm is composed by me.
 
 // Implement the speed increase that happens after 30 seconds in the original game (5)
+//  -speed + 2 after 30 seconds
 
 // Randomize each spaceship's movement direction at the start of each play (5)
 //   -The direction of all ships is random (left or right)
@@ -21,6 +22,7 @@
 //   -all the 4 SFX are original, made by me.
 
 // Display the time remaining (in seconds) on the screen (10)
+//  -Displays the second bar from the right.
 
 // Replace the UI borders with new artwork (10)
 //   -artwork used for the UI borders is also original
