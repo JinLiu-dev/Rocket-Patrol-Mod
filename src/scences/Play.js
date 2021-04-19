@@ -6,6 +6,8 @@ class Play extends Phaser.Scene{
         this.load.image('rocket', './assets/rocket.png');
         this.load.image('spaceship', './assets/spaceship.png');
         this.load.image('newship', './assets/newship.png');
+        this.load.image('gun', './assets/gun.png');
+        this.load.image('bullet', './assets/bullet.png');
         this.load.image('starfield', './assets/starfield.png');
         this.load.image('bluesky', './assets/bluesky.png');
         this.load.image('top', './assets/top.png');
@@ -44,6 +46,7 @@ class Play extends Phaser.Scene{
         //this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         this.anims.create({
@@ -116,7 +119,7 @@ class Play extends Phaser.Scene{
             this.ship02.update();
             this.ship03.update();
             this.supership.update();
-        } 
+        }
         if(this.checkCollision(this.p1Rocket, this.ship03)) {
             this.p1Rocket.reset();
             this.shipExplode(this.ship03);
@@ -136,6 +139,28 @@ class Play extends Phaser.Scene{
             this.p1Rocket.reset();
             this.shipExplode(this.supership);
             this.clock.delay += 2000;
+          }
+          for(let bullet of this.p1Rocket.bullets){
+            if(this.checkCollision(bullet, this.ship03)) {
+              bullet.alive = false;
+              this.shipExplode(this.ship03);
+              this.clock.delay += 1000;
+            }
+            if (this.checkCollision(bullet, this.ship02)) {
+              bullet.alive = false;
+              this.shipExplode(this.ship02);
+              this.clock.delay += 1000;
+            }
+            if (this.checkCollision(bullet, this.ship01)) {
+              bullet.alive = false;
+              this.shipExplode(this.ship01);
+              this.clock.delay += 1000;
+            }
+            if(this.checkCollision(bullet, this.supership)) {
+              bullet.alive = false;
+              this.shipExplode(this.supership);
+              this.clock.delay += 2000;
+            }
           }
 
     }
