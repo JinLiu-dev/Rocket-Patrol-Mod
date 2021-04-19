@@ -32,6 +32,7 @@
 
 // Create a new spaceship type (w/ new artwork) that's smaller, moves faster, and is worth more points (20)
 //   -used some CC0(no copyright) assets by Scrittl
+//   -new spaceshps move faster, is smaller and worth 40 points
 
 // Create new artwork for all of the in-game assets (rocket, spaceships, explosion) (20)
 //   -used some CC0(no copyright) assets by scofanogd, Scrittl, Sogomn
